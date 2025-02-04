@@ -1,0 +1,6 @@
+import { ABI } from "./ABI"
+
+export const THIRDWEB_CLIENT = 'e040f433ec74924a66e574e600f540a4'
+export const THIRDWEB_CLIENT_SECRET = '_N0rsZFbbARATJjwk7-4Gke4slmjjUTgmPce046Q9alQjmOVV2JJwSJy2ejL0g3MjL4QGSonP3suMzZG9smo3g'
+export const CONTRACT_ABI = ABI
+export const CONTRACT_ADDRESS = '0x70Bf28069Dd4ddd4db10665732DBDEb4b5A8F6f3'

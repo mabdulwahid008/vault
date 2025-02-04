@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+    --themeblack: #222;
+    --themeblack2: #4e4e4e;
+    --themeGreen: #00c896;
+    --themeWhite: #f2ecff;
+
+}
+
+
+@theme {
+    --font-Pooppins: 'Poppins', sans-serif;
+    --color-themeblack: var(--themeblack);
+    --color-themeGreen: var(--themeGreen);
+    --color-themeWhite: var(--themeWhite);
+    --color-themeblack2: var(--themeblack2);
+
+}
+
+
+body {
+    background-color: var(--themeblack);
+}
+
+.active {
+    color: var(--themeGreen);
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 0.5rem var(--themeGreen));
+}
+
+
+
+.border-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px; /* The border thickness */
+    background: linear-gradient(90deg, #00031C 0%, #00c896 40%, #00031C 100%);
+  }
+

@@ -4,6 +4,7 @@ import { client } from './utils/client'
 import { ConnectButton } from 'thirdweb/react'
 import Section from './components/Section'
 import Table from './components/Table'
+import WithDrawDeposit from './components/WithDrawDeposit'
 
 function App() {
   return (
@@ -11,10 +12,11 @@ function App() {
       <Navbar />
       <div className='mt-50 flex justify-center items-center'>
         <div className='w-[1225px] h-screen flex flex-col gap-10'>
-          {/* <ConnectButton client={client} /> */}
-          <Section />
-          
-          <Table />
+            <div className='flex justify-center items-center'>
+                <div className='w-[60%]'>
+                  <WithDrawDeposit />
+                </div>
+            </div>
         </div>
       </div>
     </div>

@@ -41,3 +41,29 @@ body {
     background: linear-gradient(90deg, #00031C 0%, #00c896 40%, #00031C 100%);
   }
 
+
+
+  .tw-connect-wallet {
+    border-radius: calc(infinity * 1px) !important;
+    min-width: auto !important;
+    padding: 8px 16px !important;
+    height: auto !important;
+    background-color: var(--themeWhite) !important;
+    color: var(--themeblack) !important;
+    letter-spacing: 1px !important;
+    font-size: 14px !important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600 !important;
+  }
+
+
+  input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;  /* For Chrome, Safari, Edge */
+  margin: 0;  /* Remove any margin */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;  /* For Firefox */
+  appearance: textfield;       /* For modern browsers */
+}

@@ -5,13 +5,16 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 
 import { ThirdwebProvider } from "thirdweb/react";
+import EtherProvider from './Provider/EtherProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThirdwebProvider>
-        <App />
-      </ThirdwebProvider>
-    </BrowserRouter>
+    <EtherProvider>
+      <BrowserRouter>
+        <ThirdwebProvider>
+          <App />
+        </ThirdwebProvider>
+      </BrowserRouter>
+    </EtherProvider>
   </StrictMode>,
 )

@@ -9,14 +9,8 @@ import { ethers } from 'ethers';
 import { useEthProvider } from '../Provider/EtherProvider';
 
 
-const contract = getContract({
-  client,
-  address: CONTRACT_ADDRESS,
-  chain: sepolia,
-});
 
 function WithDraw() {
-  const account = useActiveAccount();
 
 
   const [amount, setAmount] = useState(0)
@@ -29,7 +23,7 @@ function WithDraw() {
     try {
       const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
-      const tx = await contract.withdraw(2);
+      const tx = await contract.withdraw(amount);
       const receipt = await tx.wait();
     } catch (error) {
       console.log(error);

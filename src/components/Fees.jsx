@@ -44,7 +44,7 @@ function Fees() {
             </div>
             <div className='flex justify-between items-center'>
                 <p className='text-sm text-themeWhite font-Pooppins tracking-widest uppercase font-medium'>Top Pool</p>
-                <p className='text-xs text-themeWhite font-Pooppins tracking-widest font-semibold'>{topPool}</p>
+                <p className='text-xs text-themeWhite font-Pooppins tracking-widest font-semibold'>{`${topPool?.substring(0, 10)}...${topPool?.substring(topPool?.length - 7)}`}</p>
             </div>
         </div>
     )

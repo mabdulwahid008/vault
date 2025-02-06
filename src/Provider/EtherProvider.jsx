@@ -8,6 +8,12 @@ function EtherProvider({ children }) {
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null)
 
+    const disconnectMetaMask = () => {
+        setProvider(null)
+        setWalletAddress(null)
+        setSigner(null)
+    }
+
     useEffect(() => {
         if (provider) {
             const getSigner = async () => {
@@ -27,6 +33,7 @@ function EtherProvider({ children }) {
         setProvider,
         provider,
         signer,
+        disconnectMetaMask
     }
     return (
         <Context.Provider value={value}>

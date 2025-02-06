@@ -12,7 +12,7 @@ function Navbar() {
   return (
     <div className='flex justify-center w-full items-center fixed top-0 z-50 bg-themeblack/90 border-bottom'>
       <div className='sm:w-[1225px] w-full justify-between items-center py-5 flex'>
-        <h2 className='text-2xl font-extrabold tracking-widest text-themeWhite font-Pooppins'>VAULT</h2>
+        <img src='/logo.png' className='w-32' />
 
         <nav className='sm:flex hidden justify-center items-center gap-4'>
           <NavLink to='/' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Home</NavLink>

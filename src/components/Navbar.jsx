@@ -117,12 +117,12 @@ const WalletConnectModal = ({ setConnectModal }) => {
           >
             MetaMask {isMetaMaskInstalled ? "(Installed)" : "(Not Installed)"}
           </button>
-          <button
+          {/* <button
             onClick={connectWalletConnect}
             className="w-full py-2 px-4 rounded-lg bg-themeGreen/80 cursor-pointer hover:scale-[0.98] transition-all ease-in duration-200 text-themeWhite font-bold uppercase font-Pooppins tracking-wider"
           >
             WalletConnect
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

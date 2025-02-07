@@ -29,7 +29,7 @@ function WithDraw() {
       console.log(error);
 
     }
-    setLoading(true)
+    setLoading(false)
   };
   return (
     <div className='flex justify-between items-center gap-3'>

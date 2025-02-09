@@ -37,12 +37,12 @@ function WithDraw() {
         type='number'
         placeholder='ENTER NUMBER OF TOKENS'
         onChange={e => setAmount(Number(e.target.value))}
-        className='bg-themeblack2 px-4 py-2.5 placeholder:tracking-widest text-center outline-none font-bold text-white  text-sm w-full rounded-full'
+        className='bg-themeblack2 px-4 py-2.5 placeholder:tracking-widest text-center outline-none font-bold text-white text-xs sm:text-sm w-full rounded-full'
       />
       <button
         disabled={loading}
         onClick={onClick}
-        className='disabled:opacity-70 disabled:cursor-wait bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer rounded-full px-4 py-2 text-white text-sm font-Pooppins font-semibold'>
+        className='disabled:opacity-70 disabled:cursor-wait bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer rounded-full px-4 py-2 text-white text-xs sm:text-sm font-Pooppins font-semibold'>
         Withdraw
       </button>
     </div>

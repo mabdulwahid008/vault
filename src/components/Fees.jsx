@@ -42,18 +42,14 @@ function Fees() {
 
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 '>
             <div className='flex justify-between items-center'>
                 <p className='text-sm text-themeWhite font-Pooppins tracking-widest uppercase font-medium'>Performance Fee</p>
-                <p className='text-sm text-themeWhite font-Pooppins tracking-widest font-medium'>{(Number(coverageFee))}% ETH</p>
+                <p className='text-sm text-themeWhite font-Pooppins tracking-widest font-medium'>{(Number(coverageFee))}% </p>
             </div>
             <div className='flex justify-between items-center'>
-                <p className='text-sm text-themeWhite font-Pooppins tracking-widest uppercase font-medium'>Gas Coverage Fee</p>
-                <p className='text-sm text-themeWhite font-Pooppins tracking-widest font-medium'>{Number(performanceFee)}% ETH</p>
-            </div>
-            <div className='flex justify-between items-center'>
-                <p className='text-sm text-themeWhite font-Pooppins tracking-widest uppercase font-medium'>Top Pool</p>
-                <p className='text-xs text-themeWhite font-Pooppins tracking-widest font-semibold'>{`${topPool?.substring(0, 10)}...${topPool?.substring(topPool?.length - 7)}`}</p>
+                <p className='text-sm text-themeWhite font-Pooppins tracking-widest uppercase font-medium'>Pool Status</p>
+                <p className='text-xs text-themeWhite font-Pooppins tracking-widest font-semibold'>{"Active"}</p>
             </div>
         </div>
     )

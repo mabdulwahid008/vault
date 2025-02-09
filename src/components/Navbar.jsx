@@ -1,26 +1,58 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import Blockies from 'react-blockies';
 import { ethers } from 'ethers';
 import { useEthProvider } from '../Provider/EtherProvider';
+import { HiOutlineBars3BottomRight } from 'react-icons/hi2';
+import { RxCross2 } from 'react-icons/rx';
 
 function Navbar() {
 
   const [connectModal, setConnectModal] = useState(false)
   const { walletAddress, disconnectMetaMask } = useEthProvider()
+  const [drawer, setDrawer] = useState(false)
+
+  const location = useLocation()
+  useEffect(() => {
+    setDrawer(false)
+  }, [location])
 
   return (
-    <div className='flex justify-center w-full items-center fixed top-0 z-50 bg-themeblack/90 border-bottom'>
-      <div className='sm:w-[1225px] w-full justify-between items-center py-5 flex'>
-        <img src='/logo.png' className='w-32' />
+    <div className='flex justify-center w-full items-center fixed top-0 z-[99] bg-themeblack/90 border-bottom'>
+      <div className='sm:w-[1225px] w-full justify-between items-center px-4 py-4 sm:py-5 flex'>
+        <img src='/logo.png' className='w-24 sm:w-32 relative z-[99]' />
 
-        <nav className='sm:flex hidden justify-center items-center gap-4'>
+        <nav className={`sm:static fixed flex justify-center sm:flex-row flex-col max-sm:h-screen max-sm:w-full max-sm:bg-themeblack ${drawer ? 'max-sm:top-0' : 'max-sm:top-[-2000px]'} transition-all ease-in duration-300 max-sm:left-0 items-center gap-4`}>
           <NavLink to='/' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Home</NavLink>
           <NavLink to='/pool' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Pool</NavLink>
-          <NavLink to='/stake' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Stake</NavLink>
-          <NavLink to='/dex' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>DEX</NavLink>
+          <NavLink to='/swap' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Swap</NavLink>
+          <NavLink to='/docs' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Docs</NavLink>
+          <div className='sm:hidden mt-4 flex justify-end items-center gap-2 '>
+            <button className='bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-white text-sm font-Pooppins font-semibold'>
+              Discord
+            </button>
+            {!walletAddress ? <button onClick={() => setConnectModal(true)} className='bg-themeWhite/90 hover:bg-themeWhite tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-themeblack text-sm font-Pooppins font-semibold'>
+              Connect
+            </button>
+              :
+              <div onClick={disconnectMetaMask} className='flex gap-2 justify-center items-center bg-themeblack2 p-1 rounded-full px-3 cursor-pointer'>
+                <Blockies
+                  seed={walletAddress}
+                  size={10}
+                  scale={3}
+                  color="#4e4e4e"
+                  bgColor="#00c896"
+                  spotColor="#f2ecff"
+                  className="identicon"
+                />
+                <p className='text-sm font-semibold text-themeWhite'>{`${walletAddress.substring(0, 5)}...${walletAddress.substring(walletAddress.length - 3)}`}</p>
+
+              </div>
+            }
+          </div>
+
         </nav>
-        <div className='flex justify-end items-center gap-2'>
+        <div className='hidden sm:flex justify-end items-center gap-2 '>
           <button className='bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-white text-sm font-Pooppins font-semibold'>
             Discord
           </button>
@@ -38,11 +70,14 @@ function Navbar() {
                 spotColor="#f2ecff"
                 className="identicon"
               />
-           <p className='text-sm font-semibold text-themeWhite'>{`${walletAddress.substring(0, 5)}...${walletAddress.substring(walletAddress.length - 3)}`}</p>
+              <p className='text-sm font-semibold text-themeWhite'>{`${walletAddress.substring(0, 5)}...${walletAddress.substring(walletAddress.length - 3)}`}</p>
 
             </div>
           }
         </div>
+
+        {!drawer ? <HiOutlineBars3BottomRight onClick={() => setDrawer(true)} className='sm:hidden relative z-[99] flex text-3xl text-themeWhite cursor-pointer' />
+          : <RxCross2 onClick={() => setDrawer(false)} className='sm:hidden relative z-[99] flex text-3xl text-themeWhite cursor-pointer' />}
 
       </div>
       {connectModal && <WalletConnectModal setConnectModal={setConnectModal} />}
@@ -103,7 +138,7 @@ const WalletConnectModal = ({ setConnectModal }) => {
     }
   };
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/70 bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/70 bg-opacity-50 z-[99]">
       <div className="bg-themeblack p-6 rounded-lg shadow-xl w-[90%] sm:w-1/3">
         <div className='flex justify-between items-center'>
           <h2 className="text-xl text-themeWhite font-Pooppins tracking-widest uppercase mb-10 font-bold">Connect Your Wallet</h2>
@@ -117,12 +152,6 @@ const WalletConnectModal = ({ setConnectModal }) => {
           >
             MetaMask {isMetaMaskInstalled ? "(Installed)" : "(Not Installed)"}
           </button>
-          {/* <button
-            onClick={connectWalletConnect}
-            className="w-full py-2 px-4 rounded-lg bg-themeGreen/80 cursor-pointer hover:scale-[0.98] transition-all ease-in duration-200 text-themeWhite font-bold uppercase font-Pooppins tracking-wider"
-          >
-            WalletConnect
-          </button> */}
         </div>
       </div>
     </div>

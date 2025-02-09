@@ -3,8 +3,10 @@ import WithDrawDeposit from '../components/WithDrawDeposit'
 
 function Home() {
   return (
-    <div>
+    <div className='flex justify-center items-center w-full h-full pb-10'>
+        <div className='sm:w-[90%] w-full'>
       <WithDrawDeposit />
+        </div>
     </div>
   )
 }

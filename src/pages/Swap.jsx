@@ -22,7 +22,7 @@ function Swap() {
                         />
                         <TokenDropDown
                             clickABle={
-                                <button className='bg-gray-500 relative  hover:bg-themeblack2 whitespace-nowrap w-[1000] sm:w-[150px] tracking-wider transition-all ease-in duration-300 cursor-pointer rounded-lg px-4 py-2 text-white text-xs sm:text-sm font-Pooppins font-semibold'>
+                                <button className='bg-gray-500 relative  hover:bg-themeblack2 whitespace-nowrap w-[100] sm:w-[150px] tracking-wider transition-all ease-in duration-300 cursor-pointer rounded-lg px-4 py-2 text-white text-xs sm:text-sm font-Pooppins font-semibold'>
                                     {
                                     selectedTokenFrom? 
                                     <div className='flex gap-2 items-center'>

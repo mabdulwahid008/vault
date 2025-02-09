@@ -67,3 +67,8 @@ input[type="number"] {
   -moz-appearance: textfield;  /* For Firefox */
   appearance: textfield;       /* For modern browsers */
 }
+
+.no-scrollbar{
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}

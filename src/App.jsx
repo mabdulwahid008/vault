@@ -12,7 +12,7 @@ function App() {
     <div>
       <Navbar />
       <div className='mt-50 flex justify-center items-center'>
-        <div className='sm:w-[1225px] min-h-screen flex flex-col gap-10'>
+        <div className='sm:w-[1225px] min-h-screen flex flex-col pb-10'>
             <div className='flex justify-center items-center'>
                 <div className='sm:w-[70%] w-full sm:px-0 px-6'>
                   <Routes>

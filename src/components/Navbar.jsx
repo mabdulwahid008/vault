@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import { useEthProvider } from '../Provider/EtherProvider';
 import { HiOutlineBars3BottomRight } from 'react-icons/hi2';
 import { RxCross2 } from 'react-icons/rx';
+import { INFURA_API_KEY } from '../constants';
 
 function Navbar() {
 
@@ -28,7 +29,11 @@ function Navbar() {
           <NavLink to='/swap' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Swap</NavLink>
           <NavLink to='/docs' className={'text-themeWhite hover:text-themeGreen transition-all ease-in duration-150 px-2 py-2 tracking-wide font-Pooppins text-sm font-semibold uppercase '}>Docs</NavLink>
           <div className='sm:hidden mt-4 flex justify-end items-center gap-2 '>
-            <button className='bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-white text-sm font-Pooppins font-semibold'>
+            <button
+              onClick={()=> {
+                window.open('https://discord.com/invite/TSscvcP5GC', '_blank')
+              }}
+            className='bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-white text-sm font-Pooppins font-semibold'>
               Discord
             </button>
             {!walletAddress ? <button onClick={() => setConnectModal(true)} className='bg-themeWhite/90 hover:bg-themeWhite tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-themeblack text-sm font-Pooppins font-semibold'>
@@ -53,7 +58,11 @@ function Navbar() {
 
         </nav>
         <div className='hidden sm:flex justify-end items-center gap-2 '>
-          <button className='bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-white text-sm font-Pooppins font-semibold'>
+          <button
+          onClick={()=> {
+            window.open('https://discord.com/invite/TSscvcP5GC', '_blank')
+          }}
+          className='bg-themeGreen/80 hover:bg-themeGreen tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-white text-sm font-Pooppins font-semibold'>
             Discord
           </button>
           {!walletAddress ? <button onClick={() => setConnectModal(true)} className='bg-themeWhite/90 hover:bg-themeWhite tracking-wider transition-all ease-in duration-300 cursor-pointer hover:scale-[1.04] rounded-full px-4 py-2 text-themeblack text-sm font-Pooppins font-semibold'>
@@ -105,13 +114,61 @@ const WalletConnectModal = ({ setConnectModal }) => {
     if (window.ethereum) {
       const metamaskProvider = new ethers.providers.Web3Provider(window.ethereum);
       try {
+        const baseChainId = '8453'; // Base network chain ID
+        const baseChainName = 'Base'; // Base network name
+        const baseRpcUrl = 'https://base.llamarpc.com'; // Base network RPC URL
+        const baseCurrencySymbol = 'ETH'; // Currency symbol for Base network
+      
         // Request access to the user's accounts
         await window.ethereum.request({ method: "eth_requestAccounts" });
         const signer = metamaskProvider.getSigner();
         const address = await signer.getAddress();
-        setProvider(metamaskProvider);
-        setWalletAddress(address);
-        setConnectModal(false)
+
+        const network = await metamaskProvider.getNetwork();
+
+        const desiredNetworkId = 8453;
+
+        if (network.chainId !== desiredNetworkId) {
+          // alert(`You are connected to the wrong network. Please switch to the base network.`);
+          
+          try {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: ethers.utils.hexValue(desiredNetworkId) }],
+            });
+          } catch (error) {
+            if (error.code === 4902) {
+              alert("The base network is not available in MetaMask. Please add it.");
+              try {
+                await window.ethereum.request({
+                  method: 'wallet_addEthereumChain',
+                  params: [{
+                    chainId: `0x${parseInt(baseChainId).toString(16)}`,
+                    chainName: baseChainName,
+                    rpcUrls: [baseRpcUrl],
+                    nativeCurrency: {
+                      name: baseCurrencySymbol,
+                      symbol: baseCurrencySymbol,
+                      decimals: 18
+                    },
+                    blockExplorerUrls: ['https://base.org'] // Or the relevant block explorer URL
+                  }]
+                });
+              } catch (addError) {
+                console.error("Error adding network:", addError);
+                alert("Failed to add the base network. Please add it manually in MetaMask.");
+              }
+            } else {
+              console.error("Error switching network:", error);
+            }
+          }
+        } else {
+          console.log(`Connected to the correct network: ${network.name}`);
+          setProvider(metamaskProvider);
+          setWalletAddress(address);
+          setConnectModal(false);
+        }
+        
       } catch (error) {
         console.error("MetaMask connection error:", error);
       }
